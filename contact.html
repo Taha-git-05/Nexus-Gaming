@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="contact.css">
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3fdb2a;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #00cec9;
+            --error: #d63031;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .fas {
+            color: #0b0c0b;
+        }
+
+        body {
+            background-color: black;
+            background-size: cover;
+
+            background-repeat: repeat/repeat-x;
+            background-attachment: fixed;
+
+            background-image: url(hexagonal-technology-background.png);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            background-color: black;
+            color: #3fdb2a;
+        }
+
+        .contact-form {
+            background-color: black;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5),
+                /* Neon glow */
+                0 0 30px rgba(0, 255, 0, 0.5);
+            border: 2px solid rgb(36, 206, 36);
+
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #3fdb2a;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(245, 246, 250, 0.1);
+            border: 2px solid rgb(48, 202, 34);
+            border-radius: 5px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: black;
+            box-shadow: 0 0 0 3px rgb(109, 240, 33);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-card {
+            background-color: black;
+            padding: 1.5rem;
+            border-radius: 10px;
+
+            border: 2px solid rgb(40, 214, 34);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5),
+                /* Neon glow */
+                0 0 30px rgba(0, 255, 0, 0.5);
+        }
+
+        .info-card h3 {
+            color: rgb(35, 206, 35);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card h3 i {
+            font-size: 1.2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .info-item i {
+            color: rgb(25, 211, 34);
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+
+
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(86, 71, 199, 0.2);
+            border-radius: 50%;
+            color: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .option {
+            background-color: rgb(0, 0, 0);
+        }
+
+        /* Mobile styles */
+        body {
+            font-size: 14px;
+        }
+
+        /* Tablet styles */
+        @media (min-width: 600px) {
+            body {
+                font-size: 16px;
+            }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 1024px) {
+            body {
+                font-size: 18px;
+            }
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            /* Width of the sidebar */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            top: 0;
+            /* Stay at the top */
+            right: -250px;
+            /* Hide the sidebar initially */
+            /* Black background */
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            transition: right 0.5s;
+            /* Transition effect */
+            padding-top: 60px;
+            /* Space for the top */
+        }
+
+        #main {
+            transition: margin-right 0.5s;
+            /* Transition effect for main content */
+            padding: 16px;
+            /* Padding for main content */
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            /* Padding for links */
+            text-decoration: none;
+            /* No underline */
+            font-size: 25px;
+            /* Font size */
+            color: rgb(57, 199, 44);
+            /* White text color */
+            display: block;
+            /* Make links block elements */
+            transition: 0.3s;
+            /* Transition effect */
+        }
+
+
+        .openbtn {
+            font-size: 20px;
+            /* Button font size */
+            cursor: pointer;
+            /* Pointer cursor */
+            /* Button background */
+            /* Button text color */
+            border: none;
+            /* No border */
+            /* Button padding */
+            position: fixed;
+            top: 4%;
+            right: 3%;
+            background-color: #3dd41f;
+        }
+
+        .openbtn:hover {
+            background-color: #3dd41f;
+            color: #000000;
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+
+        .openbtn {
+            color: white;
+            background-color: #000000;
+
+        }
+
+        .sidebar a:hover {
+            background-color: #3dd41f;
+            color: black;
+            border-radius: 10px;
+            /* Darker background on hover */
+        }
+
+        .sidebar .closebtn {
+            font-size: 36px;
+            /* Close button size */
+            position: absolute;
+            /* Position it at the top right */
+            right: 25px;
+            /* Right padding */
+            top: 10px;
+            /* Top padding */
+            padding-top: 5px;
+        }
+
+        .sidebar .closebtn:hover {
+            padding-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Contact Us</h1>
+
+
+            <!-- Gaming-themed decorative elements -->
+            <i class="fas fa-gamepad game-icon controller"></i>
+            <i class="fas fa-headset game-icon headset"></i>
+
+            <div class="sidebar" id="sidebar">
+                <a href="login.html" class="active">Home</a>
+                <a href="#">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="SIGNUP.html">signup</a>
+                <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
+            </div>
+            <div id="main" align="left">
+                <button class="openbtn" onclick="openSidebar()">☰</button>
+        </header>
+
+        <div class="contact-container">
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option class="option" value="" disabled selected>Select a topic</option>
+                            <option class="option" value="general">General Inquiry</option>
+                            <option class="option" value="support">Technical Support</option>
+                            <option class="option" value="partnership">Partnership</option>
+                            <option class="option" value="feedback">Feedback</option>
+                            <option class="option" value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <div class="info-card">
+                    <h3><i class="fas fa-envelope"></i> Email Us</h3>
+                    <div class="info-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>General Inquiries: support@NexusGaming.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-handshake"></i>
+                        <span>Partnerships: partners@NexusGaming.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Press/Media: press@NexusGaming.com</span>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-globe"></i> Connect With Us</h3>
+                    <div class="info-item">
+                        <i class="fas fa-discord"></i>
+                        <span>Join our Discord community</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-twitter"></i>
+                        <span>Follow us on Twitter</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-instagram"></i>
+                        <span>Check our Instagram</span>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitch"><i class="fab fa-twitch"></i></a>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-question-circle"></i> Support Center</h3>
+                    <div class="info-item">
+                        <i class="fas fa-book"></i>
+                        <span>Check our FAQ for quick answers</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-comments"></i>
+                        <span>Live chat available 24/7</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+92 (333) Nexus-Gaming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="contact.js">
+        // script.js
+        function openSidebar() {
+            // Show the sidebar by setting its right position to 0
+            document.getElementById("sidebar").style.right = "0";
+            // Shift the main content to the right to make space for the sidebar
+            document.getElementById("main").style.marginRight = "250px";
+        }
+
+        function closeSidebar() {
+            // Hide the sidebar by moving it out of view
+            document.getElementById("sidebar").style.right = "-250px";
+            // Reset the main content margin to its original position
+            document.getElementById("main").style.marginRight = "0"; // Corrected casing
+        }
+    </script>
+</body>
+
+</html>

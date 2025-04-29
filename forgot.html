@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link rel="stylesheet" href="forgot.css">
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+    <style>
+        body {
+            background-color: black;
+
+            background: rgb(51, 154, 65);
+            background: radial-gradient(circle, rgba(51, 154, 65, 1) 36%, rgb(0, 0, 0) 62%);
+            background-size: cover;
+            background-repeat: repeat/repeat-x;
+            background-image: url(hexagonal-technology-background.png);
+
+        }
+
+        /* Mobile styles */
+        body {
+            font-size: 14px;
+        }
+
+        /* Tablet styles */
+        @media (min-width: 600px) {
+            body {
+                font-size: 16px;
+            }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 1024px) {
+            body {
+                font-size: 18px;
+            }
+        }
+
+
+
+
+
+
+
+        /* old */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            /* Width of the sidebar */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            top: 0;
+            /* Stay at the top */
+            right: -250px;
+            /* Hide the sidebar initially */
+            /* Black background */
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            transition: right 0.5s;
+            /* Transition effect */
+            padding-top: 60px;
+            /* Space for the top */
+        }
+
+        #main {
+            transition: margin-right 0.5s;
+            /* Transition effect for main content */
+            padding: 16px;
+            /* Padding for main content */
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            /* Padding for links */
+            text-decoration: none;
+            /* No underline */
+            font-size: 25px;
+            /* Font size */
+            color: rgb(57, 199, 44);
+            /* White text color */
+            display: block;
+            /* Make links block elements */
+            transition: 0.3s;
+            /* Transition effect */
+        }
+
+        .openbtn {
+            font-size: 20px;
+            /* Button font size */
+            cursor: pointer;
+            /* Pointer cursor */
+            /* Button background */
+            /* Button text color */
+            border: none;
+            /* No border */
+            /* Button padding */
+            position: fixed;
+            top: 4%;
+            right: 3%;
+            background-color: #3dd41f;
+        }
+
+        .openbtn:hover {
+            background-color: #3dd41f;
+            color: #000000;
+        }
+
+        .openbtn {
+            color: white;
+            background-color: #000000;
+        }
+
+        .sidebar a:hover {
+            background-color: #3dd41f;
+            color: black;
+            border-radius: 10px;
+            /* Darker background on hover */
+        }
+
+        .sidebar .closebtn {
+            font-size: 36px;
+            /* Close button size */
+            position: absolute;
+            /* Position it at the top right */
+            right: 25px;
+            /* Right padding */
+            top: 10px;
+            /* Top padding */
+        }
+
+
+
+        .header {
+            display: flex;
+            /* Use Flexbox to align items */
+            justify-content: space-between;
+            /* Space between heading and nav */
+            align-items: center;
+            /* Center items vertically */
+            top: 0%;
+        }
+
+        h1.main {
+            color: rgb(25, 219, 19);
+            justify-self: left;
+            font-family: cursive;
+            width: 15.5ch;
+            text-wrap: nowrap;
+            overflow: hidden;
+            animation: typing 2s steps(20) infinite alternate-reverse;
+
+            font-size: xx-large;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0ch;
+            }
+        }
+
+
+        h2.forgot {
+            color: rgb(25, 219, 19);
+            justify-self: center;
+            font-family: sans-serif;
+            font-size: xx-large;
+
+        }
+
+        /*background: rgb(0,0,0);
+  font-size: pt; ==> for font sizing
+  background: linear-gradient(180deg, rgba(0,0,0,1) 36%, rgba(48,189,67,1) 65%);*/
+
+        /* styles.css */
+
+
+
+
+        .nav-links {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-self: right;
+        }
+
+        .nav-links li {
+            flex: 1;
+
+        }
+
+        .sign {
+            padding-right: 40px;
+            padding-left: 60px;
+        }
+
+        .nav-links a {
+            display: block;
+            color: rgb(32, 226, 74);
+            text-align: center;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover {
+            background-color: #3dd41f;
+            color: black;
+            /* Change color on hover */
+        }
+
+
+
+        .form {
+            --bg-light: #efefef;
+            --bg-dark: #707070;
+            --clr: #38c738;
+            --clr-alpha: #9c9c9c60;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            max-width: 300px;
+            justify-self: center
+        }
+
+        .fieldset {
+            border: 2px solid rgb(64, 223, 59);
+            padding-top: 50px;
+            padding-left: 110px;
+            padding-bottom: 50px;
+            padding-right: 110px;
+
+            border-radius: 50px;
+            background-color: black;
+            justify-self: center;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5),
+                /* Neon glow */
+                0 0 60px rgba(0, 255, 0, 0.5);
+        }
+
+        .form .input-span {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding-right: 30px;
+        }
+
+        .form input[type="email"],
+        .form input[type="password"] {
+            border-radius: 0.5rem;
+            padding: 1rem 0.75rem;
+            width: 100%;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--clr-alpha);
+            outline: 2px solid var(--bg-dark);
+        }
+
+        .form input[type="email"]:focus,
+        .form input[type="password"]:focus {
+            outline: 2px solid var(--clr);
+        }
+
+        .label {
+            align-self: flex-start;
+            color: var(--clr);
+            font-weight: 600;
+        }
+
+        .form .submit {
+            padding: 1rem 0.75rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 3rem;
+            background-color: var(--bg-dark);
+            color: var(--bg-light);
+            border: none;
+            cursor: pointer;
+            transition: all 300ms;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: rgb(0, 0, 0);
+        }
+
+        .form .submit:hover {
+            background-color: rgb(35, 224, 35);
+            color: rgb(0, 0, 0);
+        }
+
+        .span {
+            text-decoration: none;
+            color: var(--bg-dark);
+        }
+
+        .span a {
+            color: var(--clr);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="main">NEXUS GAMING
+        </h1>
+
+        <div class="sidebar" id="sidebar">
+            <a href="login.html" class="active">Home</a>
+            <a href="#">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="SIGNUP.html">signup</a>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
+        </div>
+
+        <div id="main" align="left">
+            <button class="openbtn" onclick="openSidebar()">☰</button>
+
+
+            <script src="forgot.js">
+                // script.js
+                function openSidebar() {
+                    // Show the sidebar by setting its right position to 0
+                    document.getElementById("sidebar").style.right = "0";
+                    // Shift the main content to the right to make space for the sidebar
+                    document.getElementById("main").style.marginRight = "250px";
+                }
+
+                function closeSidebar() {
+                    // Hide the sidebar by moving it out of view
+                    document.getElementById("sidebar").style.right = "-250px";
+                    // Reset the main content margin to its original position
+                    document.getElementById("main").style.marginRight = "0"; // Corrected casing
+                }
+            </script>
+
+    </header>
+
+    <fieldset class="fieldset">
+        <legend class="forgot">
+            <h2 class="forgot">RESET PASSWORD</h2>
+        </legend>
+        <form class="form">
+            <span class="input-span">
+                <label for="Email" class="label">Enter Email</label>
+                <input type="email" name="email" id="email" /></span>
+
+
+            <br><br>
+            <input class="submit" type="submit" value="Search" />
+            <br><br><br><br><br>
+            <br>
+            <div id="txt" style="color: rgb(173, 163, 163);">&#64 Created By TI & Co.</div>
+        </form>
+    </fieldset>
+</body>
+
+</html>

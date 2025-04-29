@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup page</title>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: black;
+
+            background: rgb(51, 154, 65);
+            background: radial-gradient(circle, rgba(51, 154, 65, 1) 36%, rgb(0, 0, 0) 62%);
+            background-size: cover;
+            background-repeat: repeat/repeat-x;
+            background-image: url(hexagonal-technology-background.png);
+
+        }
+
+        /* Mobile styles */
+        body {
+            font-size: 14px;
+        }
+
+        /* Tablet styles */
+        @media (min-width: 600px) {
+            body {
+                font-size: 16px;
+            }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 1024px) {
+            body {
+                font-size: 18px;
+            }
+        }
+
+
+
+
+
+
+
+        /* old */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            /* Width of the sidebar */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            top: 0;
+            /* Stay at the top */
+            right: -250px;
+            /* Hide the sidebar initially */
+            /* Black background */
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            transition: right 0.5s;
+            /* Transition effect */
+            padding-top: 60px;
+            /* Space for the top */
+        }
+
+        #main {
+            transition: margin-right 0.5s;
+            /* Transition effect for main content */
+            padding: 16px;
+            /* Padding for main content */
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            /* Padding for links */
+            text-decoration: none;
+            /* No underline */
+            font-size: 25px;
+            /* Font size */
+            color: rgb(57, 199, 44);
+            /* White text color */
+            display: block;
+            /* Make links block elements */
+            transition: 0.3s;
+            /* Transition effect */
+        }
+
+        .openbtn {
+            font-size: 20px;
+            /* Button font size */
+            cursor: pointer;
+            /* Pointer cursor */
+            /* Button background */
+            /* Button text color */
+            border: none;
+            /* No border */
+            /* Button padding */
+            position: fixed;
+            top: 4%;
+            right: 3%;
+            background-color: #3dd41f;
+        }
+
+        .openbtn:hover {
+            background-color: #3dd41f;
+            color: #000000;
+        }
+
+        .openbtn {
+            color: white;
+            background-color: #000000;
+        }
+
+        .sidebar a:hover {
+            background-color: #3dd41f;
+            color: black;
+            border-radius: 10px;
+            /* Darker background on hover */
+        }
+
+        .sidebar .closebtn {
+            font-size: 36px;
+            /* Close button size */
+            position: absolute;
+            /* Position it at the top right */
+            right: 25px;
+            /* Right padding */
+            top: 10px;
+            /* Top padding */
+        }
+
+
+
+        .header {
+            display: flex;
+            /* Use Flexbox to align items */
+            justify-content: space-between;
+            /* Space between heading and nav */
+            align-items: center;
+            /* Center items vertically */
+            top: 0%;
+        }
+
+        h1.main {
+            color: rgb(25, 219, 19);
+            justify-self: left;
+            font-family: cursive;
+            width: 15.5ch;
+            text-wrap: nowrap;
+            overflow: hidden;
+            animation: typing 2s steps(20) infinite alternate-reverse;
+
+            font-size: xx-large;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0ch;
+            }
+        }
+
+
+        h2.login {
+            color: rgb(25, 219, 19);
+            justify-self: center;
+            font-family: sans-serif;
+            font-size: xx-large;
+
+        }
+
+        /*background: rgb(0,0,0);
+font-size: pt; ==> for font sizing
+background: linear-gradient(180deg, rgba(0,0,0,1) 36%, rgba(48,189,67,1) 65%);*/
+
+        /* styles.css */
+
+
+
+
+
+        .sign {
+            padding-right: 40px;
+            padding-left: 60px;
+        }
+
+
+
+
+        .form {
+            --bg-light: #efefef;
+            --bg-dark: #707070;
+            --clr: #38c738;
+            --clr-alpha: #9c9c9c60;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            max-width: 300px;
+            justify-self: center
+        }
+
+        .fieldset {
+            border: 2px solid rgb(64, 223, 59);
+            padding-top: 50px;
+            padding-left: 70px;
+            padding-bottom: 50px;
+            padding-right: 80px;
+            box-shadow: 100px #707070;
+            border-radius: 50px;
+            background-color: black;
+            justify-self: center;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5),
+                /* Neon glow */
+                0 0 60px rgba(0, 255, 0, 0.5);
+        }
+
+        .form .input-span {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding-right: 30px;
+        }
+
+        .form input[type="email"],
+        .form input[type="password"] {
+            border-radius: 0.5rem;
+            padding: 1rem 0.5rem;
+            width: 100%;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--clr-alpha);
+            outline: 2px solid var(--bg-dark);
+        }
+
+        .terms-agreement {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .social-signup {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding-left: 80px;
+            padding-right: 80px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(245, 246, 250, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+
+        .btn-social:hover {
+            background: rgba(245, 246, 250, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-social i {
+            font-size: 1.2rem;
+        }
+
+        .btn-google {
+            color: #4285F4;
+        }
+
+        .btn-facebook {
+            color: #3b67cc;
+        }
+
+
+        .terms-agreement input {
+            margin-top: 0.2rem;
+        }
+
+        .terms-agreement a {
+            color: #00cec9;
+            text-decoration: none;
+        }
+
+        .form input[type="email"]:focus,
+        .form input[type="password"]:focus {
+            outline: 2px solid var(--clr);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+        }
+
+        .password-strength {
+            height: 4px;
+            background: rgba(245, 246, 250, 0.1);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .strength-meter {
+            height: 100%;
+            width: 0%;
+            background: #d63031;
+            transition: width 0.3s ease, background 0.3s ease;
+        }
+
+        /* Password strength indicator */
+        .weak {
+            width: 30%;
+            background: var(--error);
+        }
+
+        .medium {
+            width: 60%;
+            background: #f39c12;
+        }
+
+        .strong {
+            width: 100%;
+            background: var(--success);
+        }
+
+        .form input[type="text"] {
+            border-radius: 0.5rem;
+            padding: 1rem 0.75rem;
+            width: 100%;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--clr-alpha);
+            outline: 2px solid var(--bg-dark);
+        }
+
+        .form input[type="text"]:focus {
+            outline: 2px solid var(--clr);
+        }
+
+        .label {
+            align-self: flex-start;
+            color: var(--clr);
+            font-weight: 600;
+        }
+
+        .form .submit {
+            padding: 1rem 0.75rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 3rem;
+            background-color: var(--bg-dark);
+            color: var(--bg-light);
+            border: none;
+            cursor: pointer;
+            transition: all 300ms;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: rgb(0, 0, 0);
+        }
+
+        .form .submit:hover {
+            background-color: rgb(35, 224, 35);
+            color: rgb(0, 0, 0);
+        }
+
+        .span {
+            text-decoration: none;
+            color: var(--bg-dark);
+        }
+
+        .span a {
+            color: var(--clr);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: rgba(150, 139, 139, 0.76);
+            font-size: 0.8rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .divider::before {
+            margin-right: 1rem;
+        }
+
+        .divider::after {
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <h1 class="main">NEXUS GAMING
+        </h1>
+
+        <div class="sidebar" id="sidebar">
+            <a href="login.html" class="active">Home</a>
+            <a href="#">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="SIGNUP.html">signup</a>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
+        </div>
+
+        <div id="main" align="left">
+            <button class="openbtn" onclick="openSidebar()">☰</button>
+
+
+            <script src="signup.js">
+                // script.js
+                function openSidebar() {
+                    // Show the sidebar by setting its right position to 0
+                    document.getElementById("sidebar").style.right = "0";
+                    // Shift the main content to the right to make space for the sidebar
+                    document.getElementById("main").style.marginRight = "250px";
+                }
+
+                function closeSidebar() {
+                    // Hide the sidebar by moving it out of view
+                    document.getElementById("sidebar").style.right = "-250px";
+                    // Reset the main content margin to its original position
+                    document.getElementById("main").style.marginRight = "0"; // Corrected casing
+                }
+
+                document.getElementById('signup-form').addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    const username = document.getElementById('username').value;
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirm-password').value;
+
+                    // Simple validation
+                    if (username === '' || email === '' || password === '' || confirmPassword === '') {
+                        alert('Please fill in all fields.');
+                    } else if (password !== confirmPassword) {
+                        alert('Passwords do not match.');
+                    } else {
+                        // Here you can handle the signup logic (e.g., send data to the server)
+                        alert('Signup successful!'); // Placeholder for successful signup
+                    }
+                    // Password strength indicator
+                    const passwordInput = document.getElementById('password');
+                    const strengthMeter = document.getElementById('passwordStrength');
+
+                    passwordInput.addEventListener('input', function () {
+                        const password = this.value;
+                        let strength = 0;
+
+                        // Check length
+                        if (password.length >= 8) strength += 1;
+                        if (password.length >= 12) strength += 1;
+
+                        // Check for mixed case
+                        if (password.match(/[a-z]/)) strength += 1;
+                        if (password.match(/[A-Z]/)) strength += 1;
+
+                        // Check for numbers
+                        if (password.match(/\d/)) strength += 1;
+
+                        // Check for special chars
+                        if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
+
+                        // Update strength meter
+                        strengthMeter.className = 'strength-meter';
+
+                        if (password.length === 0) {
+                            strengthMeter.style.width = '0%';
+                        } else if (strength <= 2) {
+                            strengthMeter.classList.add('weak');
+                        } else if (strength <= 4) {
+                            strengthMeter.classList.add('medium');
+                        } else {
+                            strengthMeter.classList.add('strong');
+                        }
+                    });
+
+                    // Form validation
+                    const form = document.getElementById('signupForm');
+                    form.addEventListener('submit', function (e) {
+                        e.preventDefault();
+
+                        const password = document.getElementById('password').value;
+                        const confirmPassword = document.getElementById('confirm-password').value;
+
+                        if (password !== confirmPassword) {
+                            alert('Passwords do not match!');
+                            return;
+                        }
+
+                        if (!document.getElementById('terms').checked) {
+                            alert('You must agree to the terms and conditions');
+                            return;
+                        }
+
+                        // Form is valid, proceed with submission
+                        alert('Account created successfully! (This is a demo)');
+                        // form.submit(); // Uncomment to enable actual form submission
+                    });
+
+                });
+            </script>
+
+    </header>
+    <fieldset class="fieldset">
+        <legend>
+            <h2 class="login">SIGNUP</h2>
+        </legend>
+
+        <form class="form">
+            <span class="input-span">
+                <label for="Username" class="label">Username</label>
+                <input type="text" name="name" id="Username" placeholder="Username" required /></span>
+            <span class="input-span">
+                <label for="email" class="label">Email</label>
+                <input type="email" name="email" id="email" placeholder="email" required /></span>
+            <span class="input-span">
+                <label for="password" class="label">Password</label>
+                <input type="password" name="password" id="password" placeholder="password" required /></span>
+            <span class="input-span">
+                <label for="password" class="label">Confirm Password</label>
+                <input type="password" name="password" id="password" placeholder="confirm-password" required /></span>
+
+            <div class="terms-agreement">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy
+                        Policy</a></label>
+            </div>
+            <input class="submit" type="submit" value="SIGN UP" />
+            <div class="divider">
+                OR SIGN UP WITH
+            </div>
+
+            <div class="social-signup">
+                <button type="button" class="btn-social btn-google">
+                    <i class="fab fa-google"></i>
+                    Google
+                </button>
+                <button type="button" class="btn-social btn-facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    Facebook
+                </button>
+
+            </div>
+
+            <span class="span">Already have an account? <a href="login.html">login</a></span>
+
+            <br>
+
+            <div id="txt" style="color: rgb(173, 163, 163);">&#64 Created By TI & Co.</div>
+        </form>
+    </fieldset>
+</body>
+
+</html>
