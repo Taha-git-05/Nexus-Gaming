@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Gaming - Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ff00;
+            /* Neon green */
+            --secondary: #33e333;
+            --dark: #000000;
+            --light: #f5f5f5;
+            --accent: #00ff88;
+            --card-bg: #121212;
+
+            --volume-level: 80%;
+            --brightness-level: 100%;
+            --contrast-level: 100%;
+            --saturation-level: 100%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            filter: brightness(var(--brightness-level)) contrast(var(--contrast-level)) saturate(var(--saturation-level));
+            transition: filter 0.3s ease;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(0, 0, 0, 0.9);
+
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            text-shadow: var(--text-glow);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: var(--text-glow);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 100px;
+            padding-bottom: 50px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .settings-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .settings-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .settings-header p {
+            font-size: 1.1rem;
+            color: #cccccc;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .settings-section {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            font-size: 1.8rem;
+        }
+
+        .setting-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .setting-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .setting-label span {
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        .setting-label .value {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #333;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 5px var(--primary);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 5px var(--primary);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(30px);
+            background-color: var(--dark);
+        }
+
+        .dropdown-select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            background-color: #333;
+            color: var(--light);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-select:hover {
+            border-color: var(--primary);
+        }
+
+        .dropdown-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .color-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.active {
+            border-color: var(--light);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 20px var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .settings-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* Audio Visualizer */
+        .audio-visualizer {
+            width: 100%;
+            height: 100px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2px;
+        }
+
+        .audio-bar {
+            flex-grow: 1;
+            background: var(--primary);
+            border-radius: 5px 5px 0 0;
+            transition: height 0.1s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .settings-header h1 {
+                font-size: 2rem;
+            }
+
+            .settings-header p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .settings-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .settings-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .settings-section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        .signature {
+            color: #585858;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">
+            <i class="fas fa-gamepad"></i>
+            Nexus<span>Gaming</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="dashboard.php">Home</a>
+            <a href="#">Games</a>
+            <a href="#">Library</a>
+            <a href="settings.html" class="active">Settings</a>
+        </div>
+
+        <div class="user-menu">
+            <div class="user-avatar">TI</div>
+        </div>
+    </nav>
+    <br>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="settings-header">
+                <h1>Game Settings</h1>
+                <p>Customize your gaming experience with these settings. Changes are applied automatically.</p>
+            </div>
+
+            <div class="settings-grid">
+                <!-- Audio Settings -->
+                <div class="settings-section">
+                    <div class="section-title">
+                        <i class="fas fa-volume-up"></i>
+                        <span>Audio Settings</span>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Master Volume</span>
+                            <span class="value" id="master-volume-value">80%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" value="80" class="slider" id="master-volume">
+                        </div>
+                        <div class="audio-visualizer" id="audio-visualizer">
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Music Volume</span>
+                            <span class="value" id="music-volume-value">70%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" value="70" class="slider" id="music-volume">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>SFX Volume</span>
+                            <span class="value" id="sfx-volume-value">90%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" value="90" class="slider" id="sfx-volume">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Voice Chat Volume</span>
+                            <span class="value" id="voice-volume-value">75%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" value="75" class="slider" id="voice-volume">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Mute All Sounds</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="mute-all">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Graphics Settings -->
+                <div class="settings-section">
+                    <div class="section-title">
+                        <i class="fas fa-tv"></i>
+                        <span>Graphics Settings</span>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Brightness</span>
+                            <span class="value" id="brightness-value">100%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="50" max="150" value="100" class="slider" id="brightness">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Contrast</span>
+                            <span class="value" id="contrast-value">100%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="50" max="150" value="100" class="slider" id="contrast">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Saturation</span>
+                            <span class="value" id="saturation-value">100%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="200" value="100" class="slider" id="saturation">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Resolution</span>
+                        </div>
+                        <select class="dropdown-select" id="resolution">
+                            <option value="auto">Auto (Recommended)</option>
+                            <option value="1080p">1920x1080 (Full HD)</option>
+                            <option value="1440p">2560x1440 (QHD)</option>
+                            <option value="4k">3840x2160 (4K UHD)</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>VSync</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="vsync" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>FPS Limit</span>
+                        </div>
+                        <select class="dropdown-select" id="fps-limit">
+                            <option value="60">60 FPS</option>
+                            <option value="120">120 FPS</option>
+                            <option value="144">144 FPS</option>
+                            <option value="240">240 FPS</option>
+                            <option value="unlimited">Unlimited</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Gameplay Settings -->
+                <div class="settings-section">
+                    <div class="section-title">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Gameplay Settings</span>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Field of View</span>
+                            <span class="value" id="fov-value">90°</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="60" max="120" value="90" class="slider" id="fov">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Mouse Sensitivity</span>
+                            <span class="value" id="sensitivity-value">50%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="sensitivity">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Invert Y-Axis</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="invert-y">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Show Subtitles</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="subtitles" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Difficulty Level</span>
+                        </div>
+                        <select class="dropdown-select" id="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="normal" selected>Normal</option>
+                            <option value="hard">Hard</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- UI & Theme Settings -->
+                <div class="settings-section">
+                    <div class="section-title">
+                        <i class="fas fa-palette"></i>
+                        <span>UI & Theme</span>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Theme Color</span>
+                        </div>
+                        <div class="color-options">
+                            <div class="color-option active" style="background: #00ff00;" data-color="#00ff00"></div>
+                            <div class="color-option" style="background: #00ffff;" data-color="#00ffff"></div>
+                            <div class="color-option" style="background: #ff00ff;" data-color="#ff00ff"></div>
+                            <div class="color-option" style="background: #ffff00;" data-color="#ffff00"></div>
+                            <div class="color-option" style="background: #ff6600;" data-color="#ff6600"></div>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>UI Scale</span>
+                            <span class="value" id="ui-scale-value">100%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="80" max="150" value="100" class="slider" id="ui-scale">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>HUD Transparency</span>
+                            <span class="value" id="hud-transparency-value">80%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" value="80" class="slider" id="hud-transparency">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Show FPS Counter</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="fps-counter">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Damage Numbers</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="damage-numbers" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-actions">
+                <button class="btn btn-primary" id="apply-settings">Apply Settings</button>
+                <button class="btn btn-outline" id="reset-settings">Reset to Default</button>
+            </div>
+        </div>
+    </div>
+    <div class="signature" align="right">
+        <p>@ Mr.Innoxence.</p>
+    </div>
+    <script>
+        // Audio Visualizer Animation
+        function animateAudioBars() {
+            const bars = document.querySelectorAll('.audio-bar');
+            bars.forEach(bar => {
+                const randomHeight = Math.floor(Math.random() * 100) + 10;
+                bar.style.height = `${randomHeight}%`;
+            });
+        }
+
+        // Run the animation every 100ms
+        setInterval(animateAudioBars, 100);
+
+        // Volume Control
+        const masterVolumeSlider = document.getElementById('master-volume');
+        const masterVolumeValue = document.getElementById('master-volume-value');
+        const musicVolumeSlider = document.getElementById('music-volume');
+        const musicVolumeValue = document.getElementById('music-volume-value');
+        const sfxVolumeSlider = document.getElementById('sfx-volume');
+        const sfxVolumeValue = document.getElementById('sfx-volume-value');
+        const voiceVolumeSlider = document.getElementById('voice-volume');
+        const voiceVolumeValue = document.getElementById('voice-volume-value');
+        const muteAllCheckbox = document.getElementById('mute-all');
+
+        // Update volume display
+        function updateVolumeDisplay() {
+            masterVolumeValue.textContent = `${masterVolumeSlider.value}%`;
+            musicVolumeValue.textContent = `${musicVolumeSlider.value}%`;
+            sfxVolumeValue.textContent = `${sfxVolumeSlider.value}%`;
+            voiceVolumeValue.textContent = `${voiceVolumeSlider.value}%`;
+
+            // Apply mute if checked
+            if (muteAllCheckbox.checked) {
+                document.documentElement.style.setProperty('--volume-level', '0%');
+            } else {
+                document.documentElement.style.setProperty('--volume-level', `${masterVolumeSlider.value}%`);
+            }
+        }
+
+        // Event listeners for volume controls
+        masterVolumeSlider.addEventListener('input', updateVolumeDisplay);
+        musicVolumeSlider.addEventListener('input', updateVolumeDisplay);
+        sfxVolumeSlider.addEventListener('input', updateVolumeDisplay);
+        voiceVolumeSlider.addEventListener('input', updateVolumeDisplay);
+        muteAllCheckbox.addEventListener('change', updateVolumeDisplay);
+
+        // Graphics Settings
+        const brightnessSlider = document.getElementById('brightness');
+        const brightnessValue = document.getElementById('brightness-value');
+        const contrastSlider = document.getElementById('contrast');
+        const contrastValue = document.getElementById('contrast-value');
+        const saturationSlider = document.getElementById('saturation');
+        const saturationValue = document.getElementById('saturation-value');
+        const resolutionSelect = document.getElementById('resolution');
+        const vsyncCheckbox = document.getElementById('vsync');
+        const fpsLimitSelect = document.getElementById('fps-limit');
+
+        // Update graphics settings
+        function updateGraphicsSettings() {
+            brightnessValue.textContent = `${brightnessSlider.value}%`;
+            contrastValue.textContent = `${contrastSlider.value}%`;
+            saturationValue.textContent = `${saturationSlider.value}%`;
+
+            document.documentElement.style.setProperty('--brightness-level', `${brightnessSlider.value}%`);
+            document.documentElement.style.setProperty('--contrast-level', `${contrastSlider.value}%`);
+            document.documentElement.style.setProperty('--saturation-level', `${saturationSlider.value}%`);
+
+            // In a real game, you would apply resolution and FPS limit here
+            console.log(`Resolution set to: ${resolutionSelect.value}`);
+            console.log(`VSync: ${vsyncCheckbox.checked ? 'Enabled' : 'Disabled'}`);
+            console.log(`FPS Limit: ${fpsLimitSelect.value}`);
+        }
+
+        // Event listeners for graphics controls
+        brightnessSlider.addEventListener('input', updateGraphicsSettings);
+        contrastSlider.addEventListener('input', updateGraphicsSettings);
+        saturationSlider.addEventListener('input', updateGraphicsSettings);
+        resolutionSelect.addEventListener('change', updateGraphicsSettings);
+        vsyncCheckbox.addEventListener('change', updateGraphicsSettings);
+        fpsLimitSelect.addEventListener('change', updateGraphicsSettings);
+
+        // Gameplay Settings
+        const fovSlider = document.getElementById('fov');
+        const fovValue = document.getElementById('fov-value');
+        const sensitivitySlider = document.getElementById('sensitivity');
+        const sensitivityValue = document.getElementById('sensitivity-value');
+        const invertYCheckbox = document.getElementById('invert-y');
+        const subtitlesCheckbox = document.getElementById('subtitles');
+        const difficultySelect = document.getElementById('difficulty');
+
+        // Update gameplay settings
+        function updateGameplaySettings() {
+            fovValue.textContent = `${fovSlider.value}°`;
+            sensitivityValue.textContent = `${sensitivitySlider.value}%`;
+
+            console.log(`FOV: ${fovSlider.value}°`);
+            console.log(`Mouse Sensitivity: ${sensitivitySlider.value}%`);
+            console.log(`Invert Y-Axis: ${invertYCheckbox.checked ? 'Enabled' : 'Disabled'}`);
+            console.log(`Subtitles: ${subtitlesCheckbox.checked ? 'Enabled' : 'Disabled'}`);
+            console.log(`Difficulty: ${difficultySelect.value}`);
+        }
+
+        // Event listeners for gameplay controls
+        fovSlider.addEventListener('input', updateGameplaySettings);
+        sensitivitySlider.addEventListener('input', updateGameplaySettings);
+        invertYCheckbox.addEventListener('change', updateGameplaySettings);
+        subtitlesCheckbox.addEventListener('change', updateGameplaySettings);
+        difficultySelect.addEventListener('change', updateGameplaySettings);
+
+        // UI & Theme Settings
+        const colorOptions = document.querySelectorAll('.color-option');
+        const uiScaleSlider = document.getElementById('ui-scale');
+        const uiScaleValue = document.getElementById('ui-scale-value');
+        const hudTransparencySlider = document.getElementById('hud-transparency');
+        const hudTransparencyValue = document.getElementById('hud-transparency-value');
+        const fpsCounterCheckbox = document.getElementById('fps-counter');
+        const damageNumbersCheckbox = document.getElementById('damage-numbers');
+
+        // Change theme color
+        colorOptions.forEach(option => {
+            option.addEventListener('click', function () {
+                colorOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+
+                const newColor = this.getAttribute('data-color');
+                document.documentElement.style.setProperty('--primary', newColor);
+
+                // Calculate a slightly different accent color
+                const accentColor = `${newColor}88`;
+                document.documentElement.style.setProperty('--accent', accentColor);
+
+                console.log(`Theme color changed to: ${newColor}`);
+            });
+        });
+
+        // Update UI settings
+        function updateUISettings() {
+            uiScaleValue.textContent = `${uiScaleSlider.value}%`;
+            hudTransparencyValue.textContent = `${hudTransparencySlider.value}%`;
+
+            console.log(`UI Scale: ${uiScaleSlider.value}%`);
+            console.log(`HUD Transparency: ${hudTransparencySlider.value}%`);
+            console.log(`FPS Counter: ${fpsCounterCheckbox.checked ? 'Enabled' : 'Disabled'}`);
+            console.log(`Damage Numbers: ${damageNumbersCheckbox.checked ? 'Enabled' : 'Disabled'}`);
+        }
+
+        // Event listeners for UI controls
+        uiScaleSlider.addEventListener('input', updateUISettings);
+        hudTransparencySlider.addEventListener('input', updateUISettings);
+        fpsCounterCheckbox.addEventListener('change', updateUISettings);
+        damageNumbersCheckbox.addEventListener('change', updateUISettings);
+
+        // Apply Settings Button
+        document.getElementById('apply-settings').addEventListener('click', function () {
+            // In a real application, this would save settings to server/local storage
+            alert('Settings applied successfully!');
+
+            // Update all settings displays
+            updateVolumeDisplay();
+            updateGraphicsSettings();
+            updateGameplaySettings();
+            updateUISettings();
+        });
+
+        // Reset to Default Button
+        document.getElementById('reset-settings').addEventListener('click', function () {
+            if (confirm('Are you sure you want to reset all settings to default?')) {
+                // Reset volume settings
+                masterVolumeSlider.value = 80;
+                musicVolumeSlider.value = 70;
+                sfxVolumeSlider.value = 90;
+                voiceVolumeSlider.value = 75;
+                muteAllCheckbox.checked = false;
+
+                // Reset graphics settings
+                brightnessSlider.value = 100;
+                contrastSlider.value = 100;
+                saturationSlider.value = 100;
+                resolutionSelect.value = 'auto';
+                vsyncCheckbox.checked = true;
+                fpsLimitSelect.value = '60';
+
+                // Reset gameplay settings
+                fovSlider.value = 90;
+                sensitivitySlider.value = 50;
+                invertYCheckbox.checked = false;
+                subtitlesCheckbox.checked = true;
+                difficultySelect.value = 'normal';
+
+                // Reset UI settings
+                document.querySelector('.color-option[data-color="#00ff00"]').click();
+                uiScaleSlider.value = 100;
+                hudTransparencySlider.value = 80;
+                fpsCounterCheckbox.checked = false;
+                damageNumbersCheckbox.checked = true;
+
+                // Update all displays
+                updateVolumeDisplay();
+                updateGraphicsSettings();
+                updateGameplaySettings();
+                updateUISettings();
+
+                alert('All settings have been reset to default values.');
+            }
+        });
+
+        // Initialize all settings displays
+        updateVolumeDisplay();
+        updateGraphicsSettings();
+        updateGameplaySettings();
+        updateUISettings();
+    </script>
+</body>
+
+</html>

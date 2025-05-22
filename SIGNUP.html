@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Nexus Gaming</title>
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ff00;
+            --secondary: #00cc00;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f5f5f5;
+            --accent: #00ff88;
+            --purple: #a655f7;
+
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+
+        body {
+            background-color: var(--darker);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-size: cover;
+            background-repeat: repeat/repeat-x;
+            background-image: url(pics/hexagonal-technology-background.png);
+        }
+
+        /* Header */
+        .header {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            position: relative;
+            z-index: 100;
+        }
+
+        .main {
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: var(--text-glow);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 300px;
+            position: fixed;
+            top: 0;
+            right: -300px;
+            background-color: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            overflow-x: hidden;
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            border-left: 2px solid var(--primary);
+            box-shadow: -5px 0 30px rgba(0, 255, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            padding-top: 80px;
+        }
+
+        .sidebar a {
+            padding: 18px 30px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            color: var(--light);
+            display: block;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .sidebar a i {
+            width: 25px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: var(--primary);
+            padding-left: 40px;
+            text-shadow: var(--text-glow);
+        }
+
+        .sidebar a.active {
+            background-color: rgba(0, 255, 0, 0.2);
+            color: var(--primary);
+            text-shadow: var(--text-glow);
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            color: var(--primary);
+            padding: 0;
+            border: none;
+        }
+
+        .openbtn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        .openbtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--primary);
+        }
+
+        /* Signup Form */
+        .fieldset {
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            padding: 2.5rem;
+            max-width: 500px;
+            margin: 3rem auto;
+            background-color: rgba(18, 18, 18, 0.8);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5),
+                /* Neon glow */
+                0 0 30px rgba(0, 255, 0, 0.5);
+            border: 2px solid rgb(36, 206, 36);
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .legend {
+            padding: 0 15px;
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-shadow: var(--text-glow);
+            text-align: center;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-span {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--light);
+            letter-spacing: 1px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            background-color: rgba(0, 255, 0, 0.05);
+        }
+
+        .terms-agreement {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        input[type="checkbox"] {
+            accent-color: var(--purple);
+            width: 16px;
+            height: 16px;
+            min-width: 16px;
+        }
+
+        .terms-agreement label {
+            color: var(--purple);
+            font-size: 0.9rem;
+        }
+
+        .terms-agreement a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .terms-agreement a:hover {
+            text-decoration: underline;
+        }
+
+        .submit {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: var(--dark);
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 0, 0.4);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #777;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            text-transform: uppercase;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #333;
+        }
+
+        .social-signup {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-social {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .btn-google {
+            background-color: #4285F4;
+            color: white;
+        }
+
+        .btn-facebook {
+            background-color: #3b5998;
+            color: white;
+        }
+
+        .btn-social:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .span {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+
+        .span a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .span a:hover {
+            text-decoration: underline;
+        }
+
+        #txt {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            color: #555;
+        }
+
+        /* Password Strength Indicator */
+        .password-strength {
+            margin-top: 0.3rem;
+            height: 4px;
+            background-color: #333;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .strength-meter {
+            height: 100%;
+            width: 0%;
+            background-color: red;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Password Toggle */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 45px;
+            cursor: pointer;
+            color: #777;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .fieldset {
+                margin: 2rem;
+                padding: 2rem;
+            }
+
+            .social-signup {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 250px;
+                right: -250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .fieldset {
+                padding: 1.5rem;
+                margin: 1.5rem;
+            }
+
+            .legend {
+                font-size: 1.5rem;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .main {
+                font-size: 1.5rem;
+            }
+
+            .openbtn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        .signature {
+            color: #585858;
+        }
+
+        /* Modified styles */
+        img.main-logo {
+            width: 400px;
+            top: 10%;
+            height: auto;
+
+            max-width: 500%;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html"><img src="pics/NEXUS LOGO.png"
+                alt="critical-mass-ldr-font" class="main-logo"></a>
+
+        <div class="sidebar" id="sidebar">
+            <a href="index.html">
+                <i class="fas fa-home"></i>Home
+            </a>
+            <a href="about.html">
+                <i class="fas fa-info-circle"></i>About
+            </a>
+            <a href="contact.html">
+                <i class="fas fa-envelope"></i>Contact
+            </a>
+            <a href="SIGNUP.html" class="active">
+                <i class="fas fa-user-plus"></i>Sign Up
+            </a>
+            <a href="login.html">
+                <i class="fas fa-sign-in-alt"></i>Login
+            </a>
+
+            <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">
+                <i class="fas fa-times"></i>Close
+            </a>
+        </div>
+
+        <button class="openbtn" onclick="openSidebar()">☰</button>
+    </header>
+
+    <fieldset class="fieldset">
+        <legend class="legend">CREATE ACCOUNT</legend>
+
+        <form class="form" action="signup.php" method="POST">
+            <span class="input-span">
+                <label for="Username" class="label">Username</label>
+                <input type="text" name="name" id="Username" placeholder="Enter your username" required />
+            </span>
+
+            <span class="input-span">
+                <label for="email" class="label">Email</label>
+                <input type="email" name="email" id="email" placeholder="Enter your email" required />
+            </span>
+
+            <span class="input-span">
+                <label for="password" class="label">Password</label>
+                <input type="password" name="password" id="password" placeholder="Create a password" required />
+                <i class="fas fa-eye password-toggle" id="toggle-password"></i>
+                <div class="password-strength">
+                    <div class="strength-meter" id="strength-meter"></div>
+                </div>
+            </span>
+
+            <span class="input-span">
+                <label for="confirm-password" class="label">Confirm Password</label>
+                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password"
+                    required />
+                <i class="fas fa-eye password-toggle" id="toggle-confirm-password"></i>
+            </span>
+
+            <div class="terms-agreement" required>
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the <a href="terms-conditions.html">Terms of Service</a> and <a
+                        href="privacy-policy.html">Privacy
+                        Policy</a></label>
+            </div>
+
+            <input class="submit" type="submit" value="Create Account" />
+
+            <div class="divider">
+                OR SIGN UP WITH
+            </div>
+
+            <div class="social-signup">
+                <button type="button" class="btn-social btn-google">
+                    <i class="fab fa-google"></i>
+                    Google
+                </button>
+                <button type="button" class="btn-social btn-facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    Facebook
+                </button>
+            </div>
+
+            <span class="span">Already have an account? <a href="login.html">Login</a></span>
+            <div id="txt">&#64; Created By TI & Co.</div>
+        </form>
+    </fieldset>
+    <div class="signature" align="right">
+        <p>@ Mr.Innoxence.</p>
+    </div>
+
+    <script>
+        // Sidebar functionality
+        function openSidebar() {
+            document.getElementById("sidebar").style.right = "0";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeSidebar() {
+            document.getElementById("sidebar").style.right = "-300px";
+            document.body.style.overflow = "auto";
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function (event) {
+            const sidebar = document.getElementById('sidebar');
+            const openBtn = document.querySelector('.openbtn');
+
+            if (!sidebar.contains(event.target) && event.target !== openBtn) {
+                closeSidebar();
+            }
+        });
+
+        // Password strength indicator
+        const passwordInput = document.getElementById('password');
+        const strengthMeter = document.getElementById('strength-meter');
+
+        passwordInput.addEventListener('input', function () {
+            const password = passwordInput.value;
+            let strength = 0;
+
+            // Check for length
+            if (password.length > 7) strength++;
+
+            // Check for uppercase letters
+            if (password.match(/[A-Z]/)) strength++;
+
+            // Check for numbers
+            if (password.match(/[0-9]/)) strength++;
+
+            // Check for special characters
+            if (password.match(/[^A-Za-z0-9]/)) strength++;
+
+            // Update strength meter
+            const width = strength * 25;
+            let color;
+
+            switch (strength) {
+                case 0:
+                case 1:
+                    color = 'red';
+                    break;
+                case 2:
+                    color = 'orange';
+                    break;
+                case 3:
+                    color = 'yellow';
+                    break;
+                case 4:
+                    color = 'var(--primary)';
+                    break;
+            }
+
+            strengthMeter.style.width = width + '%';
+            strengthMeter.style.backgroundColor = color;
+        });
+
+        // Form validation
+        const form = document.querySelector('.form');
+        const confirmPassword = document.getElementById('confirm-password');
+
+        form.addEventListener('submit', function (e) {
+            if (passwordInput.value !== confirmPassword.value) {
+                e.preventDefault();
+                confirmPassword.setCustomValidity("Passwords don't match");
+                confirmPassword.reportValidity();
+            } else {
+                confirmPassword.setCustomValidity('');
+            }
+        });
+
+        // Add animation to form elements
+        document.addEventListener('DOMContentLoaded', function () {
+            const formElements = document.querySelectorAll('.input-span, .terms-agreement, .submit, .divider, .social-signup, .span');
+
+            formElements.forEach((el, index) => {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(20px)";
+                el.style.transition = `all 0.5s ease ${index * 0.1}s`;
+
+                setTimeout(() => {
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                }, 100);
+            });
+        });
+
+        // Password toggle functionality
+        const togglePassword = document.getElementById('toggle-password');
+        const toggleConfirmPassword = document.getElementById('toggle-confirm-password');
+        const passwordField = document.getElementById('password');
+        const confirmPasswordField = document.getElementById('confirm-password');
+
+        function togglePasswordVisibility(field, icon) {
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        togglePassword.addEventListener('click', function () {
+            togglePasswordVisibility(passwordField, this);
+        });
+
+        toggleConfirmPassword.addEventListener('click', function () {
+            togglePasswordVisibility(confirmPasswordField, this);
+        });
+        // Display errors from PHP if they exist
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorParam = urlParams.get('error');
+
+        if (errorParam) {
+            const errors = errorParam.split('|');
+            const errorContainer = document.createElement('div');
+            errorContainer.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
+            errorContainer.style.border = '1px solid red';
+            errorContainer.style.borderRadius = '8px';
+            errorContainer.style.padding = '15px';
+            errorContainer.style.marginBottom = '20px';
+            errorContainer.style.color = '#ff5555';
+
+            errors.forEach(error => {
+                const errorElement = document.createElement('p');
+                errorElement.textContent = error;
+                errorElement.style.margin = '5px 0';
+                errorContainer.appendChild(errorElement);
+            });
+
+            // Insert the error container after the legend
+            const legend = document.querySelector('.legend');
+            legend.insertAdjacentElement('afterend', errorContainer);
+        }
+
+        // Display success message if redirected from successful signup
+        const successParam = urlParams.get('signup');
+        if (successParam === 'success') {
+            const successContainer = document.createElement('div');
+            successContainer.style.backgroundColor = 'rgba(0, 255, 0, 0.1)';
+            successContainer.style.border = '1px solid var(--primary)';
+            successContainer.style.borderRadius = '8px';
+            successContainer.style.padding = '15px';
+            successContainer.style.marginBottom = '20px';
+            successContainer.style.color = 'var(--primary)';
+            successContainer.textContent = 'Registration successful! Please login.';
+
+            // Insert the success container after the legend
+            const legend = document.querySelector('.legend');
+            legend.insertAdjacentElement('afterend', successContainer);
+        }
+    </script>
+</body>
+
+</html>

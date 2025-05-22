@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password | Nexus Gaming</title>
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ff00;
+            --secondary: #00cc00;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f5f5f5;
+            --accent: #00ff88;
+
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+
+        body {
+            background-color: var(--darker);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url(pics/hexagonal-technology-background.png);
+            background-size: cover;
+            background-repeat: repeat/repeat-x;
+        }
+
+        /* Header */
+        .header {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            position: relative;
+            z-index: 100;
+        }
+
+        .main {
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: var(--text-glow);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 300px;
+            position: fixed;
+            top: 0;
+            right: -300px;
+            background-color: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            overflow-x: hidden;
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            border-left: 2px solid var(--primary);
+            box-shadow: -5px 0 30px rgba(0, 255, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            padding-top: 80px;
+        }
+
+        .sidebar a {
+            padding: 18px 30px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            color: var(--light);
+            display: block;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .sidebar a i {
+            width: 25px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: var(--primary);
+            padding-left: 40px;
+            text-shadow: var(--text-glow);
+        }
+
+        .sidebar a.active {
+            background-color: rgba(0, 255, 0, 0.2);
+            color: var(--primary);
+            text-shadow: var(--text-glow);
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            color: var(--primary);
+            padding: 0;
+            border: none;
+        }
+
+        .openbtn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        .openbtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--primary);
+        }
+
+        /* Reset Password Form */
+        .fieldset {
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            padding: 2.5rem;
+            max-width: 500px;
+            margin: 3rem auto;
+            background-color: rgba(18, 18, 18, 0.8);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5),
+                /* Neon glow */
+                0 0 30px rgba(0, 255, 0, 0.5);
+            border: 2px solid rgb(36, 206, 36);
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .legend {
+            padding: 0 15px;
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-shadow: var(--text-glow);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-span {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--light);
+            letter-spacing: 1px;
+        }
+
+        input[type="email"] {
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="email"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            background-color: rgba(0, 255, 0, 0.05);
+        }
+
+        .submit {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: var(--dark);
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 0, 0.4);
+        }
+
+        .instructions {
+            color: #aaa;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        #txt {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            color: #555;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(29, 185, 84, 0.5);
+            z-index: 99;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .fieldset {
+                margin: 2rem;
+                padding: 2rem;
+            }
+
+            .sidebar {
+                width: 250px;
+                right: -250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .fieldset {
+                padding: 1.5rem;
+                margin: 1.5rem;
+            }
+
+            .legend {
+                font-size: 1.5rem;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .main {
+                font-size: 1.5rem;
+            }
+
+            .openbtn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        .signature {
+            color: #585858;
+        }
+
+        /* Modified styles */
+        img.main-logo {
+            width: 400px;
+            top: 10%;
+            height: auto;
+
+            max-width: 500%;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html"><img src="pics/NEXUS LOGO.png"
+                alt="critical-mass-ldr-font" class="main-logo"></a>
+
+        <div class="sidebar" id="sidebar">
+            <a href="index.html">
+                <i class="fas fa-home"></i>Home
+            </a>
+            <a href="about.html">
+                <i class="fas fa-info-circle"></i>About
+            </a>
+            <a href="contact.html">
+                <i class="fas fa-envelope"></i>Contact
+            </a>
+            <a href="signup.html">
+                <i class="fas fa-user-plus"></i>SignUp
+            </a>
+            <a href="login.html" class="active">
+                <i class="fas fa-sign-in-alt"></i>Login
+            </a>
+
+            <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">
+                <i class="fas fa-times"></i>Close
+            </a>
+        </div>
+
+        <button class="openbtn" onclick="openSidebar()">☰</button>
+    </header>
+
+    <fieldset class="fieldset">
+        <legend class="legend">RESET PASSWORD</legend>
+
+        <p class="instructions">Enter your email address and we'll send you a link to reset your password.</p>
+
+        <form class="form" action="php/reset/reset_request.php" method="post">
+            <span class="input-span">
+                <label for="email" class="label">Email Address</label>
+                <input type="email" name="email" id="email" placeholder="your@email.com" required />
+            </span>
+
+            <?php if (isset($_SESSION['reset_error'])): ?>
+            <div style="color: red; margin-bottom: 1rem;">
+                <?php echo htmlspecialchars($_SESSION['reset_error']); unset($_SESSION['reset_error']); ?>
+            </div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['reset_success'])): ?>
+            <div style="color: green; margin-bottom: 1rem;">
+                <?php echo htmlspecialchars($_SESSION['reset_success']); unset($_SESSION['reset_success']); ?>
+            </div>
+            <?php endif; ?>
+
+            <input class="submit" type="submit" value="Send Reset Link" />
+            <div id="txt">&#64; Created By TI & Co.</div>
+        </form>
+
+
+
+    </fieldset>
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    <div class="signature" align="right">
+        <p>@ Mr.Innoxence.</p>
+    </div>
+
+    <script>
+        // Sidebar functionality
+        function openSidebar() {
+            document.getElementById("sidebar").style.right = "0";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeSidebar() {
+            document.getElementById("sidebar").style.right = "-300px";
+            document.body.style.overflow = "auto";
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function (event) {
+            const sidebar = document.getElementById('sidebar');
+            const openBtn = document.querySelector('.openbtn');
+
+            if (!sidebar.contains(event.target) && event.target !== openBtn) {
+                closeSidebar();
+            }
+        });
+
+        // Form submission
+        const form = document.querySelector('.form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Here you would typically send a reset password request
+            alert('Password reset link has been sent to your email!');
+        });
+
+        // Add animation to form elements
+        document.addEventListener('DOMContentLoaded', function () {
+            const formElements = document.querySelectorAll('.legend, .instructions, .input-span, .submit');
+
+            formElements.forEach((el, index) => {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(20px)";
+                el.style.transition = `all 0.5s ease ${index * 0.1}s`;
+
+                setTimeout(() => {
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                }, 100);
+            });
+        });
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
